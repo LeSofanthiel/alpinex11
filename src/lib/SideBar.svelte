@@ -12,7 +12,7 @@
 	import SmallButton from './SmallButton.svelte';
 	import { cpuActivity, diskActivity, aiActivity } from './activities.js';
 	const icons = [
-		#{ icon: 'fas fa-info-circle', info: 'Information', activity: null },
+		{ icon: 'fas fa-info-circle', info: 'Information', activity: null },
 		{ icon: 'fas fa-wifi', info: 'Networking', activity: null },
 		{ icon: 'fas fa-microchip', info: 'CPU', activity: cpuActivity },
 		#{ icon: 'fas fa-compact-disc', info: 'Disk', activity: diskActivity },
