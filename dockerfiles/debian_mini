@@ -1,10 +1,12 @@
-FROM --platform=i386 i386/debian:latest
-ARG DEBIAN_FRONTEND=noninteractive
-RUN apt-get clean && apt-get update && apt-get -y upgrade
-RUN apt-get -y install apt-utils gcc python3 nano unzip fakeroot dbus base whiptail hexedit patch wamerican ucf manpages make curl cowsay
-RUN useradd -m user && echo "user:password" | chpasswd
+FROM docker.io/i386/alpine:3.17
+RUN echo -e "\n@testing https://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories
+
+RUN apk update
+RUN apk add alpine-base bash nano gcc openssh nodejs 
+
+RUN adduser -D -s /bin/bash user && echo 'user:password' | chpasswd
 COPY --chown=user:user ./examples /home/user/examples
-RUN chmod -R +x  /home/user/examples/lua
+RUN chmod +x  /home/user/examples/lua
 # We set WORKDIR, as this gets extracted by Webvm to be used as the cwd. This is optional.
 WORKDIR /home/user/
 # We set env, as this gets extracted by Webvm. This is optional.
