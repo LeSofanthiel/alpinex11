@@ -2,9 +2,9 @@ FROM --platform=i386 i386/debian:buster
 ARG DEBIAN_FRONTEND=noninteractive
 RUN apt-get clean && apt-get update && apt-get -y upgrade
 # Install Packages
-RUN apt-get -y install xserver-xorg-core xserver-xorg-input-libinput x11-apps xfonts-100dpi xfonts-75dpi xfonts-scalable xinit twm nano
+RUN apt-get -y install xserver-xorg-core xserver-xorg-input-libinput x11-apps xfonts-100dpi xfonts-75dpi xfonts-scalable xinit xterm ctwm nano
 # Remove drivers that dont do the do
-RUN apt-get -y remove xserver-xorg-video-amdgpu xserver-xorg-video-ati xserver-xorg-video-intel xserver-xorg-video-nouveau xserver-xorg-video-qxl xserver-xorg-video-radeon xserver-xorg-video-vmware
+#RUN apt-get -y remove xserver-xorg-video-amdgpu xserver-xorg-video-ati xserver-xorg-video-intel xserver-xorg-video-nouveau xserver-xorg-video-qxl xserver-xorg-video-radeon xserver-xorg-video-vmware
 
 WORKDIR /root
 ENV HOME="/root" TERM="xterm-256color" USER="root" SHELL="/bin/bash" EDITOR="nano" LANG="en_US.UTF-8" LC_ALL="C" DISPLAY=:0
