@@ -6,6 +6,13 @@ RUN apt-get -y install xserver-xorg-core xserver-xorg-input-libinput x11-apps xf
 # Remove drivers that dont do the do
 RUN apt-get -y remove xserver-xorg-video-amdgpu xserver-xorg-video-ati xserver-xorg-video-intel xserver-xorg-video-nouveau xserver-xorg-video-qxl xserver-xorg-video-radeon xserver-xorg-video-vmware
 
-WORKDIR /root
-ENV HOME="/root" TERM="xterm-256color" USER="root" SHELL="/bin/bash" EDITOR="nano" LANG="en_US.UTF-8" LC_ALL="C" DISPLAY=:0
+
+RUN useradd -m user && echo "user:password" | chpasswd
+COPY --chown=user:user ./examples /home/user/examples
+RUN chmod -R +x  /home/user/examples/lua
+# We set WORKDIR, as this gets extracted by Webvm to be used as the cwd. This is optional.
+WORKDIR /home/user/
+# We set env, as this gets extracted by Webvm. This is optional.
+ENV HOME="/home/user" TERM="xterm-256color" USER="user" SHELL="/bin/bash" EDITOR="vim" LANG="en_US.UTF-8" LC_ALL="C"
+RUN echo 'root:password' | chpasswd
 CMD [ "/bin/bash" ]
