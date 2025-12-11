@@ -5,7 +5,7 @@ export const diskImageType = "github";
 // Print an introduction message about the technology
 export const printIntro = true;
 // Is a graphical display needed
-export const needsDisplay = false;
+export const needsDisplay = true;
 // Executable full path (Required)
 export const cmd = CMD; // Default: "/bin/bash";
 // Arguments, as an array (Required)
