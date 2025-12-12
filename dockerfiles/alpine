@@ -1,12 +1,15 @@
-FROM docker.io/i386/alpine:3.17
+FROM docker.io/i386/alpine:latest
 
 # Set the hostname
 RUN echo "alpinex11" > /etc/hostname
 
 # Install required packages
+RUN echo -e "\n@edge https://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositories
+RUN echo -e "\n@edge https://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories
 RUN echo -e "\n@testing https://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories
-RUN apk update && apk add alpine-base udev-init-scripts udev-init-scripts-openrc eudev xorg-server xf86-input-libinput icewm font-dejavu xrandr xev bash xauth
 
+RUN apk update && apk add alpine-base udev-init-scripts udev-init-scripts-openrc eudev xorg-server xf86-input-libinput font-dejavu xrandr xev bash xauth
+RUN apk add icewm 
 # Setup the init script
 RUN rc-update add bootmisc boot && rc-update add udev sysinit && rc-update add udev-trigger sysinit && rc-update add udev-settle sysinit && rc-update add udev-postmount default && rc-update add dbus default
 
