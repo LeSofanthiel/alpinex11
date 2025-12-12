@@ -8,8 +8,8 @@ RUN echo -e "\n@edge https://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/ap
 RUN echo -e "\n@edge https://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories
 RUN echo -e "\n@testing https://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories
 
-RUN apk update && apk add alpine-base udev-init-scripts udev-init-scripts-openrc eudev xorg-server xf86-input-libinput font-dejavu xrandr xev bash xauth
-RUN apk add icewm 
+RUN apk update && apk add alpine-base udev-init-scripts udev-init-scripts-openrc eudev xorg-server xf86-input-libinput font-dejavu xrandr xev bash xauth icewm
+RUN apk add dbus 
 # Setup the init script
 RUN rc-update add bootmisc boot && rc-update add udev sysinit && rc-update add udev-trigger sysinit && rc-update add udev-settle sysinit && rc-update add udev-postmount default && rc-update add dbus default
 
