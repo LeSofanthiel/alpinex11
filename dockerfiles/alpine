@@ -5,7 +5,7 @@ RUN echo -e "\n@edge https://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/ap
 RUN echo -e "\n@edge https://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories
 RUN echo -e "\n@testing https://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories
 
-RUN apk update && apk add alpine-base xorg-server xf86-input-libinput font-dejavu xrandr xev bash icewm
+RUN apk update && apk add alpine-base xorg-server xf86-input-libinput font-dejavu xrandr xev bash icewm xinit
 
 # Add a user
 RUN adduser -D -s /bin/bash user && echo 'user:' | chpasswd
