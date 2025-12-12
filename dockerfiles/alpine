@@ -35,4 +35,5 @@ RUN apk add vim python3 nodejs gcc nano openssh
 # RUN mv /home/user/.config/xpdf.desktop /usr/share/applications/
 # RUN mv /home/user/.config/.Xresources /home/user/
 
-CMD [ "/bin/sh" ]
+# CMD [ "/bin/sh" ]
+CMD [ "/sbin/init" ]
