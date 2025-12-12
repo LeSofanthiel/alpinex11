@@ -1,5 +1,10 @@
 FROM docker.io/i386/alpine:3.17
 
+# Set the hostname
+RUN echo "alpinex11" > /etc/hostname
+# Make sure that Alpine knows that this is the hostname
+RUN echo "127.0.0.1 alpinex11" >> /etc/hosts
+
 # Install required packages
 RUN echo -e "\n@testing https://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories
 RUN apk update && apk add alpine-base udev-init-scripts udev-init-scripts-openrc eudev xorg-server xf86-input-libinput lightdm i3wm font-dejavu xrandr xev bash
@@ -9,10 +14,10 @@ RUN rc-update add bootmisc boot && rc-update add udev sysinit && rc-update add u
 RUN chmod u+s /bin/login
 
 # Add a user
-RUN adduser -D -s /bin/bash user && echo 'user:password' | chpasswd
+RUN adduser -D -s /bin/bash user && echo 'user:' | chpasswd
 
 # Allow root login
-RUN echo 'root:password' | chpasswd
+RUN echo 'root:root' | chpasswd
 
 # Configure lightdm to start i3
 RUN sed -i "s/#autologin-user=/autologin-user=user/g" /etc/lightdm/lightdm.conf && sed -i "s/#autologin-user-timeout=0/autologin-user-timeout=0/g" /etc/lightdm/lightdm.conf && sed -i "s/#autologin-session=/autologin-session=i3/g" /etc/lightdm/lightdm.conf
