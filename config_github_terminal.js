@@ -1,16 +1,13 @@
 // The root filesystem location
-//export const diskImageUrl = IMAGE_URL;
-export const diskImageUrl = "wss://disks.webvm.io/alpine_20251007.ext2";
+export const diskImageUrl = IMAGE_URL;
 // The root filesystem backend type
-//export const diskImageType = "github";
-export const diskImageType = "cloud";
+export const diskImageType = "github";
 // Print an introduction message about the technology
 export const printIntro = true;
 // Is a graphical display needed
 export const needsDisplay = true;
 // Executable full path (Required)
-//export const cmd = CMD; // Default: "/bin/bash";
-export const cmd = "/sbin/init";
+export const cmd = CMD;
 // Arguments, as an array (Required)
 export const args = ARGS; // Default: ["--login"];
 // Optional extra parameters
