@@ -1,25 +1,31 @@
 FROM docker.io/i386/alpine:latest
 
-# Install required packages
+# Add repositories
 RUN echo -e "\n@edge https://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositories
 RUN echo -e "\n@edge https://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories
 RUN echo -e "\n@testing https://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories
 
-RUN apk update && apk add alpine-base bash
+# Terminal Applications
+RUN apk update && apk add alpine-base bash zsh
+RUN apk add nano python3 gcc openssh
 
-# Add a user
+# Xorg Backend
+RUN apk add xorg-server xf86-input-libinput xf86-video-fbdev xinit dbus
+
+# Desktop environment
+RUN apk add icewm icewm-themes
+
+
+# Add a non-root user
 RUN adduser -D -s /bin/bash user && echo 'user:' | chpasswd
 
-# Allow root login
+# Assign root a basic password
 RUN echo 'root:root' | chpasswd
 
-# Add a script to support display autoresizing
+# Relevant Services
+RUN rc-update add dbus
+
+# Copied Stuff
 COPY --chown=user:user ./scripts/x11setscr.sh /etc/X11/xinit/xinitrc.d/99-x11setscr.sh
-
-# terminal apps
-RUN apk add vim python3 nodejs gcc nano openssh
-
-# config folder
-# COPY --chown=user:user ./homedir /home/user
 
 CMD [ "/bin/bash" ]
