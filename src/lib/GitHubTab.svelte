@@ -9,4 +9,4 @@
 	<span class="ml-1"><GitHubStarCount repo="LeSofanthiel/alpinex11"/></span>
 </PanelButton>
 <p>Like WebVM? <a class="underline" href="https://github.com/LeSofanthiel/alpinex11" target="_blank">Give us a star!</a></p>
-<p>WebVM is FOSS, you can fork it to build your own version and begin working on your CheerpX-based project</p
+<p>WebVM is FOSS, you can fork it to build your own version and begin working on your CheerpX-based project</p>
