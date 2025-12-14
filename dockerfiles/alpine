@@ -5,7 +5,7 @@ RUN echo -e "\n@edge https://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/ap
 RUN echo -e "\n@edge https://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories
 RUN echo -e "\n@testing https://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories
 
-RUN apk update && apk add alpine-base xorg-server xf86-input-libinput font-dejavu xrandr xev bash icewm xinit
+RUN apk update && apk add alpine-base bash
 
 # Add a user
 RUN adduser -D -s /bin/bash user && echo 'user:' | chpasswd
@@ -18,10 +18,8 @@ COPY --chown=user:user ./scripts/x11setscr.sh /etc/X11/xinit/xinitrc.d/99-x11set
 
 # terminal apps
 RUN apk add vim python3 nodejs gcc nano openssh
-# gui apps
-RUN apk add gvim gedit xterm pcmanfm thunar
 
 # config folder
-# COPY --chown=user:user ./config /home/user/.config
+# COPY --chown=user:user ./homedir /home/user
 
 CMD [ "/bin/bash" ]
