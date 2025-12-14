@@ -28,4 +28,4 @@ RUN rc-update add dbus
 # Copied Stuff
 COPY --chown=user:user ./scripts/x11setscr.sh /etc/X11/xinit/xinitrc.d/99-x11setscr.sh
 
-CMD [ "/bin/bash" ]
+CMD [ "/bin/zsh" ]
