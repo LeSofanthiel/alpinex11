@@ -10,7 +10,7 @@ RUN apk update && apk add alpine-base bash
 RUN apk add nano python3 gcc openssh
 
 # Xorg Backend
-RUN apk add xorg-server xf86-input-libinput xf86-video-fbdev xinit dbus
+RUN apk add xorg-server xf86-input-libinput xf86-video-fbdev xinit dbus xev xrandr
 
 # Desktop environment
 RUN apk add icewm
