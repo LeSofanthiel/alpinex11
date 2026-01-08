@@ -13,7 +13,7 @@ RUN apk add openrc shadow tzdata
 RUN apk add nano python3 gcc openssh sudo fastfetch
 
 # Xorg Backend
-RUN apk add xorg-server xf86-input-libinput xf86-video-fbdev xinit dbus syslog xev xrandr
+RUN apk add xorg-server xf86-input-libinput xf86-video-fbdev xinit dbus xev xrandr
 
 # Desktop environment
 RUN apk add icewm twm
