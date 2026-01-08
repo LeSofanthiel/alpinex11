@@ -1,35 +1,36 @@
-FROM docker.io/i386/alpine:latest
+FROM docker.io/i386/alpine:edge
 
 # Add repositories
 RUN echo -e "\n@edge https://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositories
 RUN echo -e "\n@edge https://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories
 RUN echo -e "\n@testing https://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories
 
-# Terminal Applications
+# Alpine Base
 RUN apk update && apk add alpine-base bash
-RUN apk add nano python3 gcc openssh doas doas-sudo-shim fastfetch
+RUN apk add openrc shadow tzdata 
+
+# Terminal Applications
+RUN apk add nano python3 gcc openssh sudo fastfetch
 
 # Xorg Backend
-RUN apk add xorg-server xf86-input-libinput xf86-video-fbdev xinit dbus xev xrandr
+RUN apk add xorg-server xf86-input-libinput xf86-video-fbdev xinit dbus syslog xev xrandr
 
 # Desktop environment
-RUN apk add icewm
+RUN apk add icewm twm
 
 # Graphical Applications
 RUN apk add xterm gedit xeyes
 
-# Add a non-root user
+# User Configuration
 RUN adduser -D -s /bin/bash user && echo 'user:' | chpasswd
 RUN adduser user wheel
-
-# Assign root a basic password
-RUN echo 'root:root' | chpasswd
+RUN echo 'root:alpine' | chpasswd
 
 # Relevant Services
-RUN rc-update add dbus
+RUN rc-update add dbus default && rc-update add syslog default
 
-# Copied Stuff
+# Scripts n stuff
 COPY --chown=user:user ./scripts/x11setscr.sh /etc/X11/xinit/xinitrc.d/99-x11setscr.sh
 RUN chmod +x /etc/X11/xinit/xinitrc.d/99-x11setscr.sh
 
-CMD [ "/bin/bash" ]
+CMD [ "/sbin/init" ]
