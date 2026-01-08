@@ -22,7 +22,7 @@ RUN apk add icewm twm
 RUN apk add xterm gedit xeyes
 
 # User Configuration
-RUN adduser -D -s /bin/bash user && echo 'user:' | chpasswd
+RUN adduser -D -s /bin/bash user && echo 'user:user' | chpasswd
 RUN adduser user wheel
 RUN echo 'root:alpine' | chpasswd
 
