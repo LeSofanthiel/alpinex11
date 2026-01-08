@@ -12,8 +12,11 @@ export const cmd = "/sbin/init";
 export const args = [];
 // Optional extra parameters
 export const opts = {
+	env: ["HOME=/home/user", "TERM=xterm-256color", "USER=user", "SHELL=/bin/bash", "EDITOR=nano", "LANG=en_US.UTF-8", "LC_ALL=C"],
+	// Current working directory
+	cwd: "/home/user",
 	// User id
-	uid: 0,
+	uid: 1000,
 	// Group id
 	gid: 0
 };
